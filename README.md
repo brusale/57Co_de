@@ -1,5 +1,4 @@
-# Half-Life Measurement of the 57Fe First Excited Metastable State
-The aim of this work is to find a measure of the half-life of the first excited metastable state of 57Fe
+57Co_de
 
 ## notebook
 
@@ -27,19 +26,10 @@ The aim of this work is to find a measure of the half-life of the first excited 
 : contains all the peak and background parameters needed in ```WindowMC.py```
 
 
-## dati
-
-- ```Dati_line``` contains data needed in the ```MCALiinearity``` notebook
-
-- ```Risol_tempi``` contains data needed in the ```Resolution``` notebook
-
-- ```TAC``` is the ods file that contains TAC linearity data; 
-
 ## .cxx files
 
 - ```SpectrumFit.cxx``` is a ROOT macro that fits the spectrum from the 122 keV detector (122 keV + 136 keV + bkg)
 
 - ```SpectrumFit14.cxx``` same thing as above, but on the 14 keV peak
 
-- ```TauSeeker.cxx``` is a ROOT macro that hopes to find the half-life of the first excited metastable state of 57Fe
 
