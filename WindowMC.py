@@ -36,7 +36,7 @@ def AreaMC(N, threshold1, threshold2, par122, par136, parbkg):
     AreaTot = 0
 
     for i in range(0, N):
-        x1 = np.random.randint(threshold1, threshold2)
+        x1 = threshold1 + (threshold2 - threshold1)*(np.random.random_sample())
         
         Area122 += (threshold2-threshold1)*gaussian(x1, *par122)/N
             
