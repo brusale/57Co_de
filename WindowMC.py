@@ -3,7 +3,7 @@
 
 # In[ ]:
 
-# MC simulation that gives an estimate of the contributionf of 122 keV, 136 keV and background
+# MC simulation that gives an estimate of the contribution of 122 keV, 136 keV and background
 # This script assumes to have a pol2 bkg
 
 import numpy as np
