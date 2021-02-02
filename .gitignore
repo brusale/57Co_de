@@ -1,3 +1,5 @@
 *.csv
 *.root
 *.dat
+*.xlsx
+*.ods
