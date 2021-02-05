@@ -62,7 +62,7 @@ int SpectrumFit() {
 	peak136->SetLineColor(kGreen);
 	peak136->Draw("same");
 
-	TF1* background = new TF1("backgrounf", "[0]*x*x+[1]*x+[2]", 3300, 5000);
+	TF1* background = new TF1("background", "[0]*x*x+[1]*x+[2]", 3300, 5000);
 	background->SetParameter(0, double_gaus->GetParameter(6));
 	background->SetParameter(1, double_gaus->GetParameter(7));
 	background->SetParameter(2, double_gaus->GetParameter(8));
