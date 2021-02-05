@@ -36,7 +36,4 @@ int TauSeeker() {
 
 	gxe.fitTo(dh);
 
-
-
-
 }
