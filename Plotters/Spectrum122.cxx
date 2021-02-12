@@ -5,7 +5,7 @@
 //                                               
 //*************************************************
 
-int Spectrum122() {
+void Spectrum122() {
 
 	// TCanvas and TH1F for bkg
 	TCanvas* cc_bkg = new TCanvas ("cc_bkg", "", 800, 600);

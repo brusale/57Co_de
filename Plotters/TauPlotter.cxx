@@ -5,7 +5,7 @@
 //
 // #############################################
 
-int TauPlotter() {
+void TauPlotter() {
 
 	// TCanvas and TH1F for bkg
 	TCanvas* cc_tau = new TCanvas ("cc_tau", "", 800, 600);
