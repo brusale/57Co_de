@@ -5,7 +5,7 @@
 //
 // #############################################
 
-int TauPlotter() {
+void TauPlotter() {
 
 	// TCanvas and TH1F for bkg
 	TCanvas* cc_tau = new TCanvas ("cc_tau", "", 800, 600);
@@ -14,7 +14,7 @@ int TauPlotter() {
 	// Load bkg and spectrum data
 	int x;
 	std::ifstream in_file, in_file2;
-    	in_file.open("./tau/27_gen_2mus_G05_5gg.dat");
+    	in_file.open("27_gen_2mus_G05_5gg.dat");
     	if (!in_file) {
         	std::cout << "error" << std::endl;
         	exit(1);
