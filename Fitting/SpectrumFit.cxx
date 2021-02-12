@@ -6,7 +6,7 @@
 // ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-int SpectrumFit() {
+void SpectrumFit() {
 
 	gStyle->SetOptFit(1111);
 

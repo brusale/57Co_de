@@ -28,6 +28,10 @@
 
 ## .cxx files
 
+- ```Spectrum122.cxx```, ```Spectrum14.cxx``` plot the spectrum for the 122 and 14 keV detectors
+
+- ```TauPlotter.cxx``` plots the time spectrum, from which the half-life of the 57Fe can be measured
+
 - ```SpectrumFit.cxx``` is a ROOT macro that fits the spectrum from the 122 keV detector (122 keV + 136 keV + bkg)
 
 - ```SpectrumFit14.cxx``` same thing as above, but on the 14 keV peak

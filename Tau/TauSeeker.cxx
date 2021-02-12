@@ -8,7 +8,7 @@
 
 using namespace RooFit;
 
-int TauSeeker() {
+void TauSeeker() {
 
 	gStyle->SetOptStat(1111);
 
