@@ -36,4 +36,6 @@
 
 - ```SpectrumFit14.cxx``` same thing as above, but on the 14 keV peak
 
+- ```TauBKGEraser.cxx``` removes all counts due to the random coincidences
+
 
