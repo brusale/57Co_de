@@ -2,7 +2,7 @@
 void TauBKGEraser () {
 
 	//load file and histo
-	TFile* file = new TFile("../Plotters/tau.root");
+	TFile* file = new TFile("./Plotters/tau.root");
 	TH1F* tau = (TH1F*)file->Get("tau");
 
 	//sidebands
