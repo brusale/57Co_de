@@ -61,7 +61,7 @@ void TauSeeker2() {
 	float sigma_m = 0.03093;
 	float sigma_q = 7.504;
 
-	float channel_tau = convolution->GetParameter(2);
+	float channel_tau = convolution->GetParameter(3);
 
 	float tauvalue = (channel_tau - q)/m;
 
