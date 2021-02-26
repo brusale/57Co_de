@@ -14,7 +14,7 @@ void TauPlotter() {
 	// Load bkg and spectrum data
 	int x;
 	std::ifstream in_file, in_file2;
-    	in_file.open("27_gen_2mus_G05_5gg.dat");
+    	in_file.open("17_feb_2mus_G01_14gg.dat");
     	if (!in_file) {
         	std::cout << "error" << std::endl;
         	exit(1);

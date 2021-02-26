@@ -2,7 +2,8 @@
 void TauBKGEraser () {
 
 	//load file and histo
-	TFile* file = new TFile("./Plotters/tau.root");
+	TFile* file = new TFile("../Plotters/tau.root");
+	TList *list = new TList();
 	TH1F* tau = (TH1F*)file->Get("tau");
 
 	//sidebands
@@ -30,24 +31,52 @@ void TauBKGEraser () {
 
 	// estimate of background
 	float background = 0.5*(background1*(delta_bkg1/delta_sig)+background2*(delta_bkg2/delta_sig));
+	float sigma_bkg = 0.5*delta_sig*sqrt(background1/pow(delta_bkg1, 2) + background2/pow(delta_bkg2, 2));
 
-	int content;
-	TH1F* tau_clean = new TH1F("tau_clean", "",  9000, 0, 8999);
+
+	int content, content_low, content_high, content_clean;
+	TH1F* tau_clean_low = new TH1F("tau_clean_low", "",  9000, 0, 8999);
+	TH1F* tau_clean_high = new TH1F("tau_clean_high", "", 9000, 0, 8999);
+	TH1F* tau_clean = new TH1F("tau_clean", "", 9000, 0, 8999);
 
 	// fill clean histogram
 	for (int ibin = 1; ibin < 8193; ibin++){
 		content = tau->GetBinContent(ibin);
-		content = content - background;
-		if (content < 0) tau_clean->SetBinContent(ibin, 0);
-		else tau_clean->SetBinContent(ibin, content);
+		content_clean = content - background;
+
+		tau_clean->SetBinContent(ibin, content_clean);
+		if (content_clean < 0) tau_clean->SetBinContent(ibin, 0);
+		else tau_clean->SetBinContent(ibin, content_clean);
+
+		content_low = content - background - sigma_bkg;
+		if (content_low < 0) tau_clean_low->SetBinContent(ibin, 0);
+		else tau_clean_low->SetBinContent(ibin, content_low);
+
+		content_high = content - background + sigma_bkg;
+		if (content_high < 0) tau_clean_high->SetBinContent(ibin, 0);
+		else tau_clean_high->SetBinContent(ibin, content_high);
 	}
 
-	TCanvas* cc_tau_clean = new TCanvas("cc_tau_clean", "", 800, 600);
 
 	tau_clean->GetXaxis()->SetTitle("Channel");
 	tau_clean->GetYaxis()->SetTitle("Counts");
+
+	tau_clean_low->GetXaxis()->SetTitle("Channel");
+	tau_clean_low->GetYaxis()->SetTitle("Counts");
+
+	tau_clean_high->GetXaxis()->SetTitle("Channel");
+	tau_clean_high->GetYaxis()->SetTitle("Counts");
 	
+	TCanvas* cc_tau_clean = new TCanvas("cc_tau_clean", "", 800, 600);
 	tau_clean->Draw();
-	tau_clean->SaveAs("TauClean.root");
+	TCanvas* cc_tau_clean_low = new TCanvas("cc_tau_clean_low", "", 800, 600);
+	tau_clean_low->Draw();
+	TCanvas* cc_tau_clean_high = new TCanvas("cc_tau_clean_high", "", 800, 600);
+	tau_clean_high->Draw();
+
+	list->Add(tau_clean);
+	list->Add(tau_clean_low);
+	list->Add(tau_clean_high);
+	list->SaveAs("TauClean.root");
 
 }
