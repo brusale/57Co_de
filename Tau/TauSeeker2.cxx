@@ -35,7 +35,7 @@ void TauSeeker2() {
 		tau->SetBinContent(ibin, avg);
 	}
 	
-	exponential->SetParameter(0, 140);
+	exponential->SetParameter(0, 130);
 	exponential->SetParameter(1, 2100);
 	exponential->SetParameter(2, 404);
 	exponential->SetParameter(3, 5);
@@ -47,12 +47,19 @@ void TauSeeker2() {
 	//define fit function
 	TF1* convolution = new TF1("convolution", "[0]+[1]/2*exp(-(x-[2])/[3]+[4]/(2*[3]*[3]))*(1+TMath::Erf((x-[2]-[4]/[3])/(sqrt(2*[4]))))", 1000, 4700);
 
-	convolution->SetParameter(0, 5);
-	convolution->SetParameter(1, 190);
+	convolution->SetParName(0, "A");
+	convolution->SetParName(1, "C");
+	convolution->SetParName(2, "t_0");
+	convolution->SetParName(3, "tau");
+	convolution->SetParName(4, "sigma sq");
+
+	convolution->SetParameter(0, 2);
+	convolution->SetParameter(1, 150);
 	convolution->SetParameter(2, 2100);
 	convolution->SetParameter(3, t);
-	convolution->SetParameter(4, 400);
+	convolution->SetParameter(4, 25000);
 
+	tau->SaveAs("TauSeeker.root");
 	tau->Fit(convolution, "R");
 
 	//find tau from TAC linearity
@@ -61,15 +68,30 @@ void TauSeeker2() {
 	float sigma_m = 0.03093;
 	float sigma_q = 7.504;
 
-	float channel_tau = convolution->GetParameter(2);
+	float channel_tau = convolution->GetParameter(3);
 
 	float tauvalue = (channel_tau - q)/m;
 
-	std::cout << "57Fe lifetime: " << tauvalue << std::endl;
+	std::cout << "\n57Fe lifetime: " << tauvalue << std::endl;
 
 	float sigma_tau = 1/pow(m, 2)*sqrt(pow((channel_tau - q),2)*sigma_m*sigma_m + sigma_q*sigma_q);
 	std::cout << "error: " << sigma_tau << std::endl;
 
-		
+	//residuals
+	Double_t channel[9000], residuals[9000];
+	for (int i = 0; i < 9000; i++) {
+		channel[i] = tau->GetBinCenter(i);
+		residuals[i] = (tau->GetBinContent(i))- (convolution->Eval(channel[i]));
+	}
+	
+	TCanvas* cc_residuals = new TCanvas("cc_residuals", "", 800, 600);
+	TGraph* gr_residuals = new TGraph(9000, channel, residuals);
+	gr_residuals->SetTitle("Residuals");
+	gr_residuals->GetXaxis()->SetTitle("Channel");
+	gr_residuals->GetYaxis()->SetTitle("Residual");
+	gr_residuals->SetMarkerSize(1.);
+	gr_residuals->SetMarkerStyle(20);
+	gr_residuals->SetMarkerColor(kRed);
+	gr_residuals->Draw("AP");
 
 }

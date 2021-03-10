@@ -3,3 +3,5 @@
 *.dat
 *.xlsx
 *.ods
+*.ipynb_checkpoints
+__pycache__/
