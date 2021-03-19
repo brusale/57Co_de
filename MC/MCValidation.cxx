@@ -44,15 +44,18 @@ void MCValidation() {
 	peak122->SetParameter(0, double_gaus->GetParameter(0));
 	peak122->SetParameter(1, double_gaus->GetParameter(1));
 	peak122->SetParameter(2, double_gaus->GetParameter(2));
+	
+	float min = double_gaus->GetParameter(1) - 1.5*double_gaus->GetParameter(2);
+	float max = double_gaus->GetParameter(1) + 1.5*double_gaus->GetParameter(2);
 
-	float integral122 = peak122->Integral(3500, 4700);
+	float integral122 = peak122->Integral(min, max);
 
 	TF1* peak136 = new TF1("136_peak", "[0]*exp(-(x-[1])*(x-[1])/(2*[2]*[2]))", 3500, 5000);
 	peak136->SetParameter(0, double_gaus->GetParameter(3));
 	peak136->SetParameter(1, double_gaus->GetParameter(4));
 	peak136->SetParameter(2, double_gaus->GetParameter(5));
 
-	float integral136 = peak136->Integral(3500, 4700);
+	float integral136 = peak136->Integral(min, max);
 
 	std::cout << integral136/integral122 << std::endl;
 
