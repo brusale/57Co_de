@@ -26,6 +26,16 @@ void TauPlotter() {
 		ibin++;
     	}
 
+	// we remove all the counts due to the 136 peak
+	// from the MC simulation we made based on the window width 
+	// the estimate for these counts is about 0.038% that of the 
+	// 122 counts
+	int clean_content;
+	for (int i = 0; i < ibin; i++) {
+		clean_content = tau->GetBinContent(i);
+		clean_content = clean_content - 0.038*clean_content;
+		tau->SetBinContent(i,clean_content);
+	}
  	tau->SetLineWidth(1.);
 	tau->SetLineColor(kBlack);
 	tau->Draw();
