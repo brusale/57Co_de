@@ -38,4 +38,6 @@
 
 - ```TauBKGEraser.cxx``` removes all counts due to the random coincidences
 
+- ``` TauSeeker2.cxx``` fits the times spectrum with the convolution of an exponential distribution with a gaussian distribution and computes tau
+
 
