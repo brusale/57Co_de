@@ -81,7 +81,10 @@ area122, area136, areaTot, bkg = AreaMC(10000,threshold1, threshold2, par122, pa
 
 print("122 peak: "+ str(area122/areaTot))
 print("136 peak: "+str(area136/areaTot))
+print("ratio 136/122: "+str(area136/area122))
+print("------")
 print("bkg: "+str(bkg/areaTot))
+
 
 # In[ ]:
 
