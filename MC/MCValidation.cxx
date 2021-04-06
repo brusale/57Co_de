@@ -1,5 +1,7 @@
 //
 // ROOT Macro for MC validation
+// the output is the ratio between the counts due to
+// 136 keV peak and those that come from the 122 keV peak
 //
 
 void MCValidation() {
