@@ -3,7 +3,7 @@
 \\ as seen by the 14keV detector.
 \\ It also computes the amount of counts
 \\ due to the Pb X-rays, in order to estimate
-\\ the percentage of counts we won't consider in
+\\ the percentage of counts to neglect consider in
 \\ the time spectrum.
 \\
 
