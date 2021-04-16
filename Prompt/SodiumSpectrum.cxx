@@ -38,13 +38,22 @@ void SodiumSpectrum() {
 	TF1 *pb_peak = new TF1("pb_peak", "[0]*exp(-(x-[1])*(x-[1])/(2*[2]))", 500, 900);
 
 	// set parameters
-	pb_peak->SetParameter(0, 120); 
+	pb_peak->SetParameter(0, 140); 
 	pb_peak->SetParameter(1, 700);
 	pb_peak->SetParameter(2, 44000);
 
 	// fit
 	spectrum->Fit(pb_peak, "RL");
 
+	//integrals
+	float counts = 0;
+	for (int i = 0; i < 5001; i++) {
+		counts+=spectrum->GetBinContent(i);
+	}
+
+	float pb_integral = pb_peak->Integral(500, 900);
+
+	std::cout << "Pb counts precentage: " << pb_integral/counts << std::endl;
 	
 
 //	spectrum->SaveAs("spectrum14.root");
