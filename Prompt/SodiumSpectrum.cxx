@@ -1,21 +1,20 @@
-\\ 
-\\ This ROOT macro plots the Na22 spectrum
-\\ as seen by the 14keV detector.
-\\ It also computes the amount of counts
-\\ due to the Pb X-rays, in order to estimate
-\\ the percentage of counts to neglect consider in
-\\ the time spectrum.
-\\
+/* 
+ This ROOT macro plots the Na22 spectrum
+ as seen by the 14keV detector.
+ It also computes the amount of counts
+ due to the Pb X-rays, in order to estimate
+ the percentage of counts to neglect consider in
+ the time spectrum.
+*/
 
 void SodiumSpectrum() {
 
-	// TCanvas and TH1F for bkg
-	TCanvas* cc_bkg = new TCanvas ("cc_bkg", "", 800, 600);
+	gStyle->SetOptFit(1111);
 
 	// Load bkg and spectrum data
 	int x;
 	std::ifstream in_file, in_file2;
-	in_file.open("14_x10.dat");
+	in_file.open("14_x10_1000V.dat");
     	if (!in_file) {
         	std::cout << "error" << std::endl;
         	exit(1);
@@ -36,11 +35,15 @@ void SodiumSpectrum() {
 	spectrum->Draw();
 
 	//define fit function for the Pb peak at approximately 80 keV
-	TF1 *pb_peak = new TF1("pb_peak", "[0]*exp(-(x-[1])*(x-[1])/(2*[2]))");
+	TF1 *pb_peak = new TF1("pb_peak", "[0]*exp(-(x-[1])*(x-[1])/(2*[2]))", 500, 900);
 
 	// set parameters
+	pb_peak->SetParameter(0, 120); 
+	pb_peak->SetParameter(1, 700);
+	pb_peak->SetParameter(2, 44000);
 
 	// fit
+	spectrum->Fit(pb_peak, "RL");
 
 	
 
