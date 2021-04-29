@@ -14,7 +14,7 @@ void PromptPlotter() {
 	// Load bkg and spectrum data
 	int x;
 	std::ifstream in_file, in_file2;
-    	in_file.open("16_04_prompt_piombo.dat");
+    	in_file.open("23_04_prompt_no_piombo_finestre_strette.dat");
     	if (!in_file) {
         	std::cout << "error" << std::endl;
         	exit(1);
@@ -33,14 +33,14 @@ void PromptPlotter() {
 	int clean_content;
 	for (int i = 0; i < ibin; i++) {
 		clean_content = tau->GetBinContent(i);
-		clean_content = clean_content - 0.19747*clean_content;
+		clean_content = clean_content - 0.0570421*clean_content;
 		tau->SetBinContent(i,clean_content);
 	}
 
  	tau->SetLineWidth(1.);
 	tau->SetLineColor(kBlack);
 	tau->Draw();
-	tau->SaveAs("prompt.root");
+	tau->SaveAs("prompt2.root");
 
 
 }

@@ -2,7 +2,7 @@
 void PromptBKGEraser () {
 
 	//load file and histo
-	TFile* file = new TFile("prompt.root");
+	TFile* file = new TFile("prompt2.root");
 	TList *list = new TList();
 	TH1F* tau = (TH1F*)file->Get("tau");
 
@@ -77,6 +77,6 @@ void PromptBKGEraser () {
 	list->Add(tau_clean);
 	list->Add(tau_clean_low);
 	list->Add(tau_clean_high);
-	list->SaveAs("PromptClean.root");
+	list->SaveAs("Prompt2Clean.root");
 
 }

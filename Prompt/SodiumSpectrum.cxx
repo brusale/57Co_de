@@ -51,10 +51,10 @@ void SodiumSpectrum() {
 		counts+=spectrum->GetBinContent(i);
 	}
 
-	float pb_integral = pb_peak->Integral(500, 900);
+	float pb_integral = pb_peak->Integral(900, 4000);
 
 	std::cout << "Pb counts precentage: " << pb_integral/counts << std::endl;
 	
 
-//	spectrum->SaveAs("spectrum14.root");
+	spectrum->SaveAs("spectrum_na.root");
 }

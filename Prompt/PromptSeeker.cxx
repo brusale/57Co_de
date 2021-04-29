@@ -15,7 +15,7 @@ void PromptSeeker() {
 	gStyle->SetOptFit(1111);
 
 	// load spectrum without bkg due to random coincidences
-	TFile* file = new TFile("./TauClean.root");
+	TFile* file = new TFile("./Prompt2Clean.root");
 	TH1F* tau = (TH1F*)file->Get("tau_clean_low");
 
 	//fit only the right part of the spectrum with an exponential distribution
@@ -62,7 +62,7 @@ void PromptSeeker() {
 	convolution->SetParameter(3, t);
 	convolution->SetParameter(4, 25000);
 
-	tau->SaveAs("TauSeeker.root");
+//	tau->SaveAs("TauSeeker.root");
 	tau->Fit(convolution, "R");
 
 	//find tau from TAC linearity
