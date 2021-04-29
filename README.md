@@ -8,6 +8,8 @@ This directory contains the notebooks for MCA and TAC linearity.
 
 ## MC
 Different scripts for a MC simulation that estimates the number of counts based on the window width we choose.
+-```WindowMC.py``` we can choose how wide our window is going to be, in units of sigma
+		python WindowMC.py --sigma <width>
 
 ## Plotters
 Various ROOT macros that plot the energy spectra from the two detectos and also the time spectra we use to determine the half-life of 57Fe.
