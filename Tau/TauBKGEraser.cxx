@@ -40,23 +40,25 @@ void TauBKGEraser () {
 	TH1F* tau_clean = new TH1F("tau_clean", "", 9000, 0, 8999);
 
 	// fill clean histogram
+
+	// we take also a 0.038*content out of the histogram because these are conuts from the 136 keV peak
 	for (int ibin = 1; ibin < 8193; ibin++){
 		content = tau->GetBinContent(ibin);
 		content_clean = content - background;
 
 		tau_clean->SetBinContent(ibin, content_clean);
 		if (content_clean < 0) tau_clean->SetBinContent(ibin, 0);
-		else tau_clean->SetBinContent(ibin, content_clean);
+		else tau_clean->SetBinContent(ibin, content_clean - 0.038*content_clean);
 
 		content_low = content - background - sigma_bkg;
 		if (content_low < 0) tau_clean_low->SetBinContent(ibin, 0);
-		else tau_clean_low->SetBinContent(ibin, content_low);
+		else tau_clean_low->SetBinContent(ibin, content_low - 0.038*content_low);
 
 		content_high = content - background + sigma_bkg;
 		if (content_high < 0) tau_clean_high->SetBinContent(ibin, 0);
-		else tau_clean_high->SetBinContent(ibin, content_high);
-	}
+		else tau_clean_high->SetBinContent(ibin, content_high-0.038*content_high);
 
+	}
 
 	tau_clean->GetXaxis()->SetTitle("Channel");
 	tau_clean->GetYaxis()->SetTitle("Counts");
