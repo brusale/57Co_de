@@ -5,3 +5,4 @@
 *.ods
 *.ipynb_checkpoints
 __pycache__/
+*.tex
