@@ -63,7 +63,6 @@ void TauSeeker2() {
 	convolution->SetParameter(3, t);
 	convolution->SetParameter(4, 80*80);
 
-
 	tau->SaveAs("TauSeeker.root");
 	tau->Fit(convolution, "R");
 
@@ -90,21 +89,21 @@ void TauSeeker2() {
 	std::cout << "\n57Fe half-life: " << half_life << std::endl;
 	std::cout << "error: " << sigma_half_life << std::endl;
 	//residuals
-	/*Double_t channel[9000], residuals[9000];
-	for (int i = 0; i < 9000; i++) {
-		channel[i] = tau->GetBinCenter(i);
-		residuals[i] = (tau->GetBinContent(i))- (convolution->Eval(channel[i]));
+	Double_t channel[3000], residuals[3000];
+	for (int i = 1500; i < 4500; i++) {
+		channel[i-1500] = tau->GetBinCenter(i);
+		residuals[i] = ((tau->GetBinContent(i))- (convolution->Eval(channel[i-1500])))/(tau->GetBinContent(i));
 	}
 	
-	TCanvas* cc_residuals = new TCanvas("cc_residuals", "", 800, 600);
-	TGraph* gr_residuals = new TGraph(9000, channel, residuals);
+/*	TCanvas* cc_residuals = new TCanvas("cc_residuals", "", 800, 600);
+	TGraph* gr_residuals = new TGraph(3000, channel, residuals);
 	gr_residuals->SetTitle("Residuals");
 	gr_residuals->GetXaxis()->SetTitle("Channel");
 	gr_residuals->GetYaxis()->SetTitle("Residual");
 	gr_residuals->SetMarkerSize(1.);
 	gr_residuals->SetMarkerStyle(20);
 	gr_residuals->SetMarkerColor(kRed);
-	gr_residuals->Draw("AP");*/
+	gr_residuals->Draw("AL");*/
 
 
 }
